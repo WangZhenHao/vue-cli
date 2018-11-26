@@ -47,8 +47,26 @@ module.exports = {
       ? config.build.assetsPublicPath
       : config.dev.assetsPublicPath
   },
+
+  /**
+   * resolve配置模块如何解析
+   * @type {Object}
+   */
   resolve: {
+    /**
+     * 自动解析确定的扩展
+     * 能够使用户在引入模块时不带扩展：
+     * import fire from './page/home/home'
+     */
     extensions: ['.js', '.vue', '.json'],
+    /**
+     * resolve.alias
+     * 创建 import 或 require 的别名，来确保模块引入变得更简单
+     * 给定对象的键后的末尾添加 $，以表示精准匹配
+     * import vue form 'vue' 精准匹配，所以vue/dist/vue.esm.js被解析导入
+     *
+     * import test from '@/config.js'  //非精准匹配，触发普通解析
+     */
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
@@ -72,6 +90,7 @@ module.exports = {
         include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
       },
       {
+
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
         options: {
