@@ -104,6 +104,10 @@ module.exports = {
   module: {
     rules: [
       {
+        /**
+         * vue-loader： 解析和转换 .vue 文件，提取出其中的逻辑代码 script、样式代码 style、以及 HTML 模版 template，再分别把它们交给对应的 Loader 去处理。
+         * @type {RegExp}
+         */
         test: /\.vue$/,
         loader: 'vue-loader',
         options: vueLoaderConfig
