@@ -1,10 +1,19 @@
 'use strict'
+/**
+ * path 模块提供了一些用于处理文件路径的小工具
+ * @type {[type]}
+ */
 const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
 
 function resolve (dir) {
+   // path.join([path1][, path2][, ...])
+   //   用于连接路径。该方法的主要用途在于，会正确使用当前系统的路径分隔符，Unix系统是"/"，Windows系统是"\"。
+   //   
+   //  __dirname在 Node.js 环境中运行时，输出文件的目录名。
+   //  __dirname在 是node.js一个全局变量，指向当前执行的脚本所在文件目录。
   return path.join(__dirname, '..', dir)
 }
 
@@ -13,7 +22,22 @@ function resolve (dir) {
 module.exports = {
   /**
    * 基础目录，绝对路径，用于从配置中解析入口起点(entry point)和 loader
-   * @type str
+   *
+   * path.resolve([from ...], to)
+   * 将 to 参数解析为绝对路径，给定的路径的序列是从右往左被处理的，后面每个 path 被依次解析，直到构造完成一个绝对路径
+   * 
+   * path.resolve('/foo/bar', './baz');
+     返回: '/foo/bar/baz'
+      
+     path.resolve('/foo/bar', '/tmp/file/');
+     返回: '/tmp/file'
+
+
+     path.resolve('wwwroot', 'static_files/png/', '../gif/image.gif');
+     如果当前工作目录为 /home/myself/node，
+     则返回 '/home/myself/node/wwwroot/static_files/gif/image.gif'
+
+    
    */
   context: path.resolve(__dirname, '../'),
 
