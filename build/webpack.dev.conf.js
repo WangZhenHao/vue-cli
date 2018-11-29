@@ -15,7 +15,18 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
  * @type {[type]}
  */
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+
+/**
+ * 能够更好在终端看到webapck运行的警告和错误
+ * @type {[type]}
+ */
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+
+/**
+ * A simple tool to find an open port on the current machine
+ * 一个寻找当前机器开放端口的简单工具
+ * @type {[type]}
+ */
 const portfinder = require('portfinder')
 
 const HOST = process.env.HOST
@@ -54,6 +65,10 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     }
   },
   plugins: [
+    /**
+     * 注入当前环境标识，可以工具不同的环境执行不同的行为
+     * 多用于切换基础配置
+     */
     new webpack.DefinePlugin({
       'process.env': require('../config/dev.env')
     }),
@@ -73,11 +88,11 @@ const devWebpackConfig = merge(baseWebpackConfig, {
        * @type {String}
        */
       template: 'index.html',
-      title: 'test',
       /**
-       * title生成html文件的标题
+       * 模板的html文件的标题
        * @type {String}
        */
+      title: 'test',
       /**
        * inject有四个值： true body head false
 
@@ -106,6 +121,11 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 
 module.exports = new Promise((resolve, reject) => {
   portfinder.basePort = process.env.PORT || config.dev.port
+  /**
+   * 这个应该就是端口号了
+   * @param  {[type]} (err, port          [description]
+   * @return {[type]}       [description]
+   */
   portfinder.getPort((err, port) => {
     if (err) {
       reject(err)

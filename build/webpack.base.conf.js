@@ -108,14 +108,11 @@ module.exports = {
      */
     rules: [
       {
-<<<<<<< HEAD
         //匹配规则
-=======
         /**
          * vue-loader： 解析和转换 .vue 文件，提取出其中的逻辑代码 script、样式代码 style、以及 HTML 模版 template，再分别把它们交给对应的 Loader 去处理。
          * @type {RegExp}
          */
->>>>>>> 9f8e556c198defdb0278b72fbb08ca716e463be2
         test: /\.vue$/,
         // 使用的loader
         loader: 'vue-loader',
