@@ -102,23 +102,32 @@ module.exports = {
    * @type {Object}
    */
   module: {
+    /**
+     * rules 创建模块时，匹配请求的规则数组。这些规则能够修改模块的创建方式。这些规则能够对模块(module)应用 loader，或者修改解析器(parser)。
+     * @type {Array}
+     */
     rules: [
       {
+        //匹配规则
         test: /\.vue$/,
+        // 使用的loader
         loader: 'vue-loader',
         options: vueLoaderConfig
       },
       {
         test: /\.js$/,
         loader: 'babel-loader',
+        //表示哪些目录中的 .js 文件需要进行 babel-loader
         include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
       },
       {
 
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
+
         options: {
           limit: 10000,
+          //生成的文件路径
           name: utils.assetsPath('img/[name].[hash:7].[ext]')
         }
       },
@@ -137,9 +146,18 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
-      }
+      },
+      // {
+      //   test: /\.html$/,
+      //   loader: 'html-loader'
+      // }
     ]
   },
+  /**
+   * 这些选项可以配置是否 polyfill 或 mock 某些 Node.js 全局变量和模块。这可以使最初为 Node.js 
+   * 环境编写的代码，在其他环境（如浏览器）中运行。
+   *
+   */
   node: {
     // prevent webpack from injecting useless setImmediate polyfill because Vue
     // source contains it (although only uses it if it's native).

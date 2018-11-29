@@ -67,16 +67,59 @@ const webpackConfig = merge(baseWebpackConfig, {
         ? 'index.html'
         : config.build.index,
       template: 'index.html',
+      /**
+       * 生成的html文档的标题。配置该项，它并不会替换指定模板文件中的title元素的内容，除非html模板文件中使用了模板引擎语法来获取该配置项值，如下ejs模板语法形式
+       * <title><%= htmlWebpackPlugin.options.title %></title>
+       * @type {String}
+       */
+      title: 'test',
+
       inject: true,
       minify: {
+        /**
+         * 删除注释
+         * @type {Boolean}
+         */
         removeComments: true,
-        collapseWhitespace: true,
-        removeAttributeQuotes: true
+        /**
+         * 去除空格
+         * @type {Boolean}
+         */
+        collapseWhitespace: false,
+        /**
+         * 移除属性的引号
+         * @type {Boolean}
+         */
+        removeAttributeQuotes: false,
+        /**
+         * minifyCSS: 压缩html里面的css
+         * minifyJS: 压缩html里面的js
+         */
         // more options:
         // https://github.com/kangax/html-minifier#options-quick-reference
       },
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-      chunksSortMode: 'dependency'
+      /**
+       * chunksSortMode
+
+        script的顺序，默认四个选项： none auto dependency {function}
+
+        'dependency' 不用说，按照不同文件的依赖关系来排序。
+
+        'auto' 默认值，插件的内置的排序方式，具体顺序....
+
+        'none' 无序？
+
+        {function} 提供一个函数？
+       * @type {String}
+       */
+      chunksSortMode: 'dependency',
+      /**
+       * chunks: ['main', 'index']
+       * chunks主要用于多入口文件，当你有多个入口文件，那就回编译后生成多个打包后的文件，那么chunks 就能选择你要使用那些js文件
+       * 编译:<script type=text/javascript src="index.js"></script>
+              <script type=text/javascript src="main.js"></script>
+       */
     }),
     // keep module.id stable when vendor modules does not change
     new webpack.HashedModuleIdsPlugin(),

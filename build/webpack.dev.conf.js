@@ -2,10 +2,18 @@
 const utils = require('./utils')
 const webpack = require('webpack')
 const config = require('../config')
+//合并配置
 const merge = require('webpack-merge')
 const path = require('path')
 const baseWebpackConfig = require('./webpack.base.conf')
+//在webpack中拷贝文件和文件夹
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+
+/**
+ * 为html文件中引入的外部资源如script、link动态添加每次compile后的hash，防止引用缓存的外部文件问题
+ * 可以生成创建html入口文件，比如单页面可以生成一个html文件入口，配置N个html-webpack-plugin可以生成N个页面入口
+ * @type {[type]}
+ */
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
@@ -54,16 +62,43 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     new webpack.NoEmitOnErrorsPlugin(),
     // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
+      /**
+       * 就是html文件的文件名，默认是index.html
+       * @type {String}
+       */
       filename: 'index.html',
+
+      /**
+       * 指定你生成的文件所依赖哪一个html文件模板
+       * @type {String}
+       */
       template: 'index.html',
-      inject: true
+      title: 'test',
+      /**
+       * title生成html文件的标题
+       * @type {String}
+       */
+      /**
+       * inject有四个值： true body head false
+
+          true 默认值，script标签位于html文件的 body 底部
+          body script标签位于html文件的 body 底部
+          head script标签位于html文件的 head中
+          false 不插入生成的js文件，这个几乎不会用到
+       */
+      inject: true,
     }),
     // copy custom static assets
     new CopyWebpackPlugin([
       {
+        // 定义要拷贝的源目录 
         from: path.resolve(__dirname, '../static'),
+        // 定义要拷贝到的目标目录
         to: config.dev.assetsSubDirectory,
+        // 忽略拷贝指定的文件 
         ignore: ['.*']
+        // flatten 只拷贝文件不管文件夹      默认是false
+        // toType  file 或者 dir         可选，默认是文件
       }
     ])
   ]
