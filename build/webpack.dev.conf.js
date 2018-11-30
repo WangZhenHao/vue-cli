@@ -29,6 +29,10 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
  */
 const portfinder = require('portfinder')
 
+/**
+ *  process.env向当前shell的环境变量
+ * @type {[type]}
+ */
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
