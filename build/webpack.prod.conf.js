@@ -25,15 +25,22 @@ const env = process.env.NODE_ENV === 'testing'
 
 const webpackConfig = merge(baseWebpackConfig, {
   module: {
+    //cssloader
     rules: utils.styleLoaders({
       sourceMap: config.build.productionSourceMap,
       extract: true,
       usePostCSS: true
     })
   },
+  // 控制是否生成，以及如何生成 source map。
   devtool: config.build.productionSourceMap ? config.build.devtool : false,
+  /**
+   * [output description]
+   * @type {Object}
+   */
   output: {
     path: config.build.assetsRoot,
+    
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
     chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
   },
