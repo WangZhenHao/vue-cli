@@ -5,10 +5,18 @@ const webpack = require('webpack')
 const config = require('../config')
 const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.conf')
+//在webpack中拷贝文件和文件夹
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+
+//将样式文件单独打包输出的文件由配置文件中的output属性指定
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+
+// 用于优化或者压缩css资源
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+
+//压缩js
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const env = process.env.NODE_ENV === 'testing'
