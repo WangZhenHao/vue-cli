@@ -11,6 +11,7 @@ const webpack = require('webpack')
 const config = require('../config')
 const webpackConfig = require('./webpack.prod.conf')
 
+// 在终端显示ora库的loading效果
 const spinner = ora('building for production...')
 spinner.start()
 
@@ -20,9 +21,12 @@ spinner.start()
 */
 rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
   if (err) throw err
+  //在删除完成的回调函数中开始编译
   webpack(webpackConfig, (err, stats) => {
+    //停止loading
     spinner.stop()
     if (err) throw err
+    //在编译完成的回调函数中,在终端输出编译的文件
     process.stdout.write(stats.toString({
       colors: true,
       modules: false,
