@@ -40,16 +40,12 @@ const webpackConfig = merge(baseWebpackConfig, {
    */
   output: {
     path: config.build.assetsRoot,
-<<<<<<< HEAD
     /**
      * 输出文件
      * filename： '[name].js'  用于多个入口点
      * filename: '[chunkhash].js' 用于长效缓存
        utils.assetsPath()方法用于输出文件到指定位置
     */
-=======
-    
->>>>>>> d7d5da8cbede3d8c20598b37d9895299d2e9e193
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
     /**
      * 此选项决定了非入口(non-entry) chunk 文件的名称
