@@ -160,6 +160,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
      */
     new webpack.NoEmitOnErrorsPlugin(),
     // https://github.com/ampedandwired/html-webpack-plugin
+
+    //开启一个本地服务需要添加指定的文件名
     new HtmlWebpackPlugin({
       /**
        * 就是html文件的文件名，默认是index.html
@@ -222,7 +224,7 @@ module.exports = new Promise((resolve, reject) => {
       // Add FriendlyErrorsPlugin
       devWebpackConfig.plugins.push(new FriendlyErrorsPlugin({
         compilationSuccessInfo: {
-          messages: [`Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`],
+          messages: [`您的应用运行在: http://${devWebpackConfig.devServer.host}:${port}`],
         },
         onErrors: config.dev.notifyOnErrors
         ? utils.createNotifierCallback()
